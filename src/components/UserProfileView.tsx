@@ -22,6 +22,7 @@ import { DeleteConfirmationModal } from './DeleteConfirmationModal'
 import { UserProfileEditModal } from './UserProfileEditModal'
 import { SavedJobsModal } from './SavedJobsModal'
 import { JobDetailsModal } from './JobDetailsModal'
+import { ShareProfileModal } from './ShareProfileModal'
 import { supabase } from '../lib/supabase'
 
 // TypeScript interfaces for the data structures
@@ -66,6 +67,7 @@ export function UserProfileView({ onSignOut }: UserProfileViewProps) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showEditProfileModal, setShowEditProfileModal] = useState(false)
   const [showSavedJobsModal, setShowSavedJobsModal] = useState(false)
+  const [showShareProfileModal, setShowShareProfileModal] = useState(false)
   const [selectedJobForDetails, setSelectedJobForDetails] = useState<any>(null)
   const [showJobDetailsModal, setShowJobDetailsModal] = useState(false)
   const [profileData, setProfileData] = useState<ProfileData | null>(null)
@@ -310,7 +312,10 @@ export function UserProfileView({ onSignOut }: UserProfileViewProps) {
 
                 {/* Action Buttons - Top Row */}
                 <div className="flex flex-wrap gap-3">
-                  <button className="bg-[#FFC107] hover:bg-[#FFB300] text-black px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-[#FFC107]/25 flex items-center space-x-2">
+                  <button 
+                    onClick={() => setShowShareProfileModal(true)}
+                    className="bg-[#FFC107] hover:bg-[#FFB300] text-black px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-[#FFC107]/25 flex items-center space-x-2"
+                  >
                     <Share2 className="w-4 h-4" />
                     <span>Share Profile</span>
                   </button>
@@ -640,6 +645,16 @@ export function UserProfileView({ onSignOut }: UserProfileViewProps) {
           onClose={handleCloseJobDetails}
           job={selectedJobForDetails}
           userId={profileData?.id || null}
+        />
+      )}
+
+      {/* Share Profile Modal */}
+      {showShareProfileModal && profileData && (
+        <ShareProfileModal
+          isOpen={showShareProfileModal}
+          onClose={() => setShowShareProfileModal(false)}
+          profileId={profileData.id}
+          profileName={getFullName()}
         />
       )}
     </div>
