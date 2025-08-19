@@ -11,6 +11,7 @@ import { JobDetailsModal } from './components/JobDetailsModal';
 import { JobSeekerProfileCompletion } from './components/JobSeekerProfileCompletion';
 import { CompanyProfileCompletion } from './components/CompanyProfileCompletion';
 import { CompanyProfileView } from './components/CompanyProfileView';
+import { PrivacyTermsModal } from './components/PrivacyTermsModal';
 import { supabase, type User } from './lib/supabase';
 
 interface SignupData {
@@ -79,6 +80,7 @@ export default function App() {
   const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(null);
   const [isJobDetailsModalOpen, setIsJobDetailsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [isPrivacyTermsModalOpen, setIsPrivacyTermsModalOpen] = useState(false);
 
   const texts = [
     "What job are you looking for?",
@@ -1051,6 +1053,10 @@ export default function App() {
             <div className="flex items-center space-x-6">
               <a 
                 href="/privacy-terms" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsPrivacyTermsModalOpen(true);
+                }}
                 className="text-gray-400 hover:text-[#FFC107] transition-colors duration-200 text-sm"
               >
                 Privacy Policy and Terms of Use
@@ -1088,6 +1094,12 @@ export default function App() {
         onClose={() => setIsJobDetailsModalOpen(false)}
         job={selectedJob}
         userId={user?.id || null}
+      />
+
+      {/* Privacy Terms Modal */}
+      <PrivacyTermsModal
+        isOpen={isPrivacyTermsModalOpen}
+        onClose={() => setIsPrivacyTermsModalOpen(false)}
       />
     </div>
   );
