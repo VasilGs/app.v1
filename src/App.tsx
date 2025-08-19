@@ -1050,16 +1050,10 @@ export default function App() {
             {/* Links */}
             <div className="flex items-center space-x-6">
               <a 
-                href="/terms" 
+                href="/privacy-terms" 
                 className="text-gray-400 hover:text-[#FFC107] transition-colors duration-200 text-sm"
               >
-                Terms and Conditions
-              </a>
-              <a 
-                href="/privacy" 
-                className="text-gray-400 hover:text-[#FFC107] transition-colors duration-200 text-sm"
-              >
-                Privacy Policy
+                Privacy Policy and Terms of Use
               </a>
               <a 
                 href="/cookies" 
