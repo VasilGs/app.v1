@@ -21,6 +21,7 @@ interface SignupModalProps {
 }
 
 export function SignupModal({ isOpen, onClose, onSwitchToLogin, onContinueSignup }: SignupModalProps) {
+export function SignupModal({ isOpen, onClose, onSwitchToLogin, onContinueSignup, onOpenPrivacyTerms }: SignupModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
