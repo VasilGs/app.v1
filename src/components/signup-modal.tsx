@@ -17,6 +17,7 @@ interface SignupModalProps {
   onClose: () => void
   onSwitchToLogin: () => void
   onContinueSignup: (signupData: SignupData) => void
+  onOpenPrivacyTerms: () => void
 }
 
 export function SignupModal({ isOpen, onClose, onSwitchToLogin, onContinueSignup }: SignupModalProps) {
@@ -257,13 +258,27 @@ export function SignupModal({ isOpen, onClose, onSwitchToLogin, onContinueSignup
         <div className="mt-4 text-center">
           <p className="text-xs text-gray-500">
             By creating an account, you agree to our{' '}
-            <a href="/terms" className="text-[#FFC107] hover:text-[#FFB300] transition-colors duration-200">
+            <button 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                onOpenPrivacyTerms();
+              }}
+              className="text-[#FFC107] hover:text-[#FFB300] transition-colors duration-200 underline"
+            >
               Terms of Service
-            </a>{' '}
+            </button>{' '}
             and{' '}
-            <a href="/privacy" className="text-[#FFC107] hover:text-[#FFB300] transition-colors duration-200">
+            <button 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                onOpenPrivacyTerms();
+              }}
+              className="text-[#FFC107] hover:text-[#FFB300] transition-colors duration-200 underline"
+            >
               Privacy Policy
-            </a>
+            </button>
           </p>
         </div>
       </div>

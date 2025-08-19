@@ -1079,6 +1079,7 @@ export default function App() {
         onClose={() => setIsSignupModalOpen(false)} 
         onSwitchToLogin={() => setIsLoginModalOpen(true)}
         onContinueSignup={handleContinueSignup}
+        onOpenPrivacyTerms={() => setIsPrivacyTermsModalOpen(true)}
       />
 
       {/* Login Modal */}
