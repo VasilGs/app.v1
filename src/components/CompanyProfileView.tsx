@@ -26,6 +26,7 @@ import { JobPostModal } from './JobPostModal'
 import { ApplicationsDashboardModal } from './ApplicationsDashboardModal'
 import { ApplicantDetailsModal } from './ApplicantDetailsModal'
 import { DeleteConfirmationModal } from './DeleteConfirmationModal'
+import { AddOnsModal } from './AddOnsModal'
 import { supabase } from '../lib/supabase'
 
 interface CompanyData {
@@ -60,6 +61,7 @@ export function CompanyProfileView({ company, onUpdateSuccess, onSignOut }: Comp
   const [showApplicationsModal, setShowApplicationsModal] = useState(false)
   const [showApplicantDetailsModal, setShowApplicantDetailsModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showAddOnsModal, setShowAddOnsModal] = useState(false)
   const [selectedApplicationId, setSelectedApplicationId] = useState<string>('')
   const [selectedApplicantId, setSelectedApplicantId] = useState<string>('')
   
@@ -477,6 +479,22 @@ export function CompanyProfileView({ company, onUpdateSuccess, onSignOut }: Comp
             </div>
           </button>
 
+          {/* Add-ons */}
+          <button 
+            onClick={() => setShowAddOnsModal(true)}
+            className="bg-gradient-to-br from-white/10 to-white/5 hover:from-[#FFC107]/20 hover:to-[#FFB300]/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-[#FFC107]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#FFC107]/10 hover:-translate-y-1 group"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FFC107] to-[#FFB300] rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-[#FFC107]/30">
+                <Zap className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-white font-semibold text-lg group-hover:text-[#FFC107] transition-colors duration-300">Add-ons</h3>
+                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Premium features</p>
+              </div>
+            </div>
+          </button>
+
           {/* Delete Profile */}
           <button 
             onClick={() => setShowDeleteModal(true)}
@@ -547,6 +565,12 @@ export function CompanyProfileView({ company, onUpdateSuccess, onSignOut }: Comp
         onClose={handleCloseApplicantDetails}
         applicationId={selectedApplicationId}
         applicantId={selectedApplicantId}
+      />
+
+      {/* Add-ons Modal */}
+      <AddOnsModal
+        isOpen={showAddOnsModal}
+        onClose={() => setShowAddOnsModal(false)}
       />
 
       {/* Delete Confirmation Modal */}
