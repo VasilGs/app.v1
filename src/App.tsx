@@ -1061,12 +1061,6 @@ export default function App() {
               >
                 Privacy Policy and Terms of Use
               </a>
-              <a 
-                href="/cookies" 
-                className="text-gray-400 hover:text-[#FFC107] transition-colors duration-200 text-sm"
-              >
-                Cookie Policy
-              </a>
             </div>
           </div>
         </div>
