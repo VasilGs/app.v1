@@ -181,11 +181,11 @@ export function Pricing({
                     }
                     format={{
                       style: "currency",
-                      currency: "USD",
+                      currency: "EUR",
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 0,
                     }}
-                    formatter={(value) => `$${value}`}
+                    formatter={(value) => `€${value}`}
                     transformTiming={{
                       duration: 500,
                       easing: "ease-out",
