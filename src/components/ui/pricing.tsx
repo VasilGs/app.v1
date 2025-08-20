@@ -31,14 +31,12 @@ interface PricingProps {
   title?: string;
   description?: string;
   onViewAddOns?: () => void;
-  onViewAddOns?: () => void;
 }
 
 export function Pricing({
   plans,
   title = "Simple, Transparent Pricing",
   description = "Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.",
-  onViewAddOns,
   onViewAddOns,
 }: PricingProps) {
   const [isMonthly, setIsMonthly] = useState(true);
