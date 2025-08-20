@@ -38,7 +38,7 @@ interface TextRotateProps {
   elementLevelClassName?: string
 }
 
-export interface TextRotateRef {
+interface TextRotateRef {
   next: () => void
   previous: () => void
   jumpTo: (index: number) => void
