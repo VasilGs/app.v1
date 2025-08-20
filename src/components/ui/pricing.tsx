@@ -10,7 +10,8 @@ import { Check, Star } from "lucide-react";
 import { useState, useRef } from "react";
 import confetti from "canvas-confetti";
 import NumberFlow from "@number-flow/react";
-import { Briefcase, Users } from "lucide-react";
+import { Briefcase, Users, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface PricingPlan {
   name: string;
@@ -30,12 +31,14 @@ interface PricingProps {
   title?: string;
   description?: string;
   onViewAddOns?: () => void;
+  onViewAddOns?: () => void;
 }
 
 export function Pricing({
   plans,
   title = "Simple, Transparent Pricing",
   description = "Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.",
+  onViewAddOns,
   onViewAddOns,
 }: PricingProps) {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -239,6 +242,19 @@ export function Pricing({
           </motion.div>
         ))}
       </div>
+
+      {/* New button for Add-ons */}
+      {onViewAddOns && (
+        <div className="mt-12 text-center">
+          <Button
+            onClick={onViewAddOns}
+            className="bg-[#FFC107] hover:bg-[#FFB300] text-black px-8 py-4 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-[#FFC107]/25 text-lg flex items-center justify-center mx-auto space-x-3"
+          >
+            <Zap className="w-6 h-6" />
+            <span>Explore Premium Add-ons</span>
+          </Button>
+        </div>
+      )}
 
       {/* New button for Add-ons */}
       {onViewAddOns && (
