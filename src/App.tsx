@@ -833,6 +833,7 @@ export default function App() {
                 buttonText: "Get Started Free",
                 href: "/sign-up",
                 isPopular: false,
+                userType: "job_seeker",
               },
               {
                 name: "EMPLOYER PRO",
@@ -853,6 +854,7 @@ export default function App() {
                 buttonText: "Start Free Trial",
                 href: "/sign-up",
                 isPopular: true,
+                userType: "employer",
               },
               {
                 name: "ENTERPRISE",
@@ -873,6 +875,7 @@ export default function App() {
                 buttonText: "Contact Sales",
                 href: "/contact",
                 isPopular: false,
+                userType: "employer",
               },
             ]}
           />

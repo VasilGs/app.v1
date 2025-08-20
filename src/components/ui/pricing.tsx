@@ -10,6 +10,7 @@ import { Check, Star } from "lucide-react";
 import { useState, useRef } from "react";
 import confetti from "canvas-confetti";
 import NumberFlow from "@number-flow/react";
+import { Briefcase, Users } from "lucide-react";
 
 interface PricingPlan {
   name: string;
@@ -21,6 +22,7 @@ interface PricingPlan {
   buttonText: string;
   href: string;
   isPopular: boolean;
+  userType: 'job_seeker' | 'employer';
 }
 
 interface PricingProps {
@@ -37,6 +39,7 @@ export function Pricing({
   const [isMonthly, setIsMonthly] = useState(true);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const switchRef = useRef<HTMLButtonElement>(null);
+  const [selectedUserType, setSelectedUserType] = useState<'job_seeker' | 'employer'>('job_seeker');
 
   const handleToggle = (checked: boolean) => {
     setIsMonthly(!checked);
@@ -67,6 +70,9 @@ export function Pricing({
     }
   };
 
+  // Filter plans based on selected user type
+  const filteredPlans = plans.filter(plan => plan.userType === selectedUserType);
+
   return (
     <div className="py-16 lg:py-24">
       <div className="text-center space-y-4 mb-12">
@@ -76,6 +82,34 @@ export function Pricing({
         <p className="text-gray-300 text-lg whitespace-pre-line max-w-3xl mx-auto">
           {description}
         </p>
+        
+        {/* User Type Selection */}
+        <div className="flex justify-center mt-8 mb-8">
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-2 border border-white/10 flex items-center space-x-2">
+            <button
+              onClick={() => setSelectedUserType('job_seeker')}
+              className={`flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                selectedUserType === 'job_seeker'
+                  ? 'bg-[#FFC107] text-black shadow-lg shadow-[#FFC107]/25'
+                  : 'bg-transparent text-gray-300 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <Briefcase className="w-5 h-5" />
+              <span>For Job Seekers</span>
+            </button>
+            <button
+              onClick={() => setSelectedUserType('employer')}
+              className={`flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                selectedUserType === 'employer'
+                  ? 'bg-[#FFC107] text-black shadow-lg shadow-[#FFC107]/25'
+                  : 'bg-transparent text-gray-300 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <Users className="w-5 h-5" />
+              <span>For Employers</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="flex justify-center items-center mb-10 space-x-4">
@@ -94,7 +128,7 @@ export function Pricing({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {plans.map((plan, index) => (
+        {filteredPlans.map((plan, index) => (
           <motion.div
             key={index}
             initial={{ y: 50, opacity: 0 }}
@@ -103,8 +137,8 @@ export function Pricing({
                 ? {
                     y: plan.isPopular ? -20 : 0,
                     opacity: 1,
-                    x: index === 2 ? -30 : index === 0 ? 30 : 0,
-                    scale: index === 0 || index === 2 ? 0.94 : 1.0,
+                    x: filteredPlans.length === 3 ? (index === 2 ? -30 : index === 0 ? 30 : 0) : 0,
+                    scale: filteredPlans.length === 3 && (index === 0 || index === 2) ? 0.94 : 1.0,
                   }
                 : { y: 0, opacity: 1 }
             }
@@ -122,7 +156,7 @@ export function Pricing({
               plan.isPopular ? "border-[#FFC107] border-2" : "border-white/20",
               "flex flex-col",
               !plan.isPopular && "mt-5",
-              index === 0 || index === 2
+              filteredPlans.length === 3 && (index === 0 || index === 2)
                 ? "z-0 transform translate-x-0 translate-y-0"
                 : "z-10",
             )}
