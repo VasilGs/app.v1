@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-const SeekerApp   = React.lazy(() => import('./features/seeker/SeekerApp'));
+const SeekerApp = React.lazy(() => import('./features/seeker/App'));
 const EmployerApp = React.lazy(() => import('./features/employer/App'));
 const Verify      = React.lazy(() => import('./pages/Verify')); // create this file later
 
