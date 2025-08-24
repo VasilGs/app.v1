@@ -1,6 +1,6 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import JobCard from "../../components/JobCard";
+import JobCard from "./JobCard";
 
 interface Job {
   id: number;
